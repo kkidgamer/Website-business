@@ -1,0 +1,21 @@
+{% extends "base.html" %}{% block content %}
+<div class="auth card p-4">
+  <h3>Create admin account</h3>
+  <form method="post">
+    <label>Username</label
+    ><input
+      class="form-control mb-3"
+      name="username"
+      minlength="3"
+      required
+    /><label>Password (10+ characters)</label
+    ><input
+      class="form-control mb-3"
+      name="password"
+      type="password"
+      minlength="10"
+      required
+    /><button class="btn btn-primary w-100">Create account</button>
+  </form>
+</div>
+{% endblock %}

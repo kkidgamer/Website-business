@@ -1,0 +1,21 @@
+{% extends "base.html" %}{% block content %}
+<h2>Business discovery</h2>
+<form method="post" class="card p-3">
+  <label>Category</label
+  ><select class="form-select mb-2" name="category">
+    {% for x in ['Salon','Hotel','School','Clinic','Restaurant'] %}
+    <option>{{x}}</option>
+    {% endfor %}</select
+  ><label>Town / area</label
+  ><input
+    class="form-control mb-2"
+    name="location"
+    value="Nairobi"
+    required
+  /><button class="btn btn-primary">Search Google Places</button>
+</form>
+<div class="alert alert-warning mt-3">
+  Up to 20 results per query in this starter. A missing website URL remains
+  UNVERIFIED, not proof of no website. Verify before outreach.
+</div>
+{% endblock %}

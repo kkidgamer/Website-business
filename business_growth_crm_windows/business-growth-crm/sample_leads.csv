@@ -1,0 +1,3 @@
+business_name,category,county,town,phone,email,website,source
+Sample Salon,Salon,Nairobi,Nairobi,0712345678,,,Sample CSV
+Sample Guesthouse,Hotel,Kakamega,Kakamega,0722000000,,https://example.com,Sample CSV

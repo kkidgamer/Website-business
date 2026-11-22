@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block content %}
+<div class="d-flex justify-content-between align-items-center"><h2>Fact Finder review</h2><a class="btn btn-outline-primary" href="/fact-finder">Import permitted CSV</a></div>
+<p class="text-muted">Only promote details you have checked. Source evidence is retained with the finding.</p>
+{% for f in findings %}
+<article class="card mb-3"><div class="card-body"><div class="d-flex justify-content-between"><h5>{{f.business_name}}</h5><span class="badge text-bg-secondary">{{f.status}}</span></div>
+<p class="mb-1"><strong>{{f.source_name}}</strong> · retrieved {{f.retrieved_at.strftime('%Y-%m-%d') }} · confidence {{f.confidence}}%</p>
+{% if f.source_url %}<p class="mb-1"><a href="{{f.source_url}}" target="_blank" rel="noopener">Open source record</a></p>{% endif %}
+<p class="mb-1">{{f.category}}{% if f.town %} · {{f.town}}{% endif %}{% if f.phone %} · {{f.phone}}{% endif %}{% if f.website %} · {{f.website}}{% endif %}</p><p class="small text-muted mb-2">Evidence: {{f.evidence}}</p>
+{% if f.duplicate_of_lead %}<p class="text-warning">Possible CRM match: <a href="/leads/{{f.duplicate_of_lead.id}}">{{f.duplicate_of_lead.business_name}}</a></p>{% endif %}
+{% if f.status in ['Pending review','Possible duplicate'] %}<form method="post" action="/fact-finder/{{f.id}}/review"><textarea class="form-control mb-2" name="reviewer_note" placeholder="What did you verify?"></textarea><button class="btn btn-success" name="action" value="promote">Promote after verification</button> <button class="btn btn-outline-danger" name="action" value="reject">Reject</button></form>{% elif f.reviewer_note %}<p class="small">Review note: {{f.reviewer_note}}</p>{% endif %}
+</div></article>
+{% else %}<div class="alert alert-info">No findings yet. Import a permitted CSV export to begin.</div>{% endfor %}
+{% endblock %}

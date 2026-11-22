@@ -1,0 +1,28 @@
+{% extends "base.html" %}{% block content %}
+<h2>Campaigns</h2>
+<form method="post" class="card p-3 mb-3">
+  <input
+    class="form-control mb-2"
+    name="name"
+    placeholder="Campaign name"
+    required
+  /><input
+    class="form-control mb-2"
+    name="offer"
+    placeholder="Offer / product"
+  /><textarea
+    class="form-control mb-2"
+    name="message_template"
+    placeholder="Message template"
+  ></textarea
+  ><button class="btn btn-primary">Save campaign</button>
+</form>
+{% for c in campaigns %}
+<div class="card p-3 mb-2">
+  <h5>{{c.name}}</h5>
+  {{c.offer}}
+  <p>{{c.message_template}}</p>
+</div>
+{% else %}
+<p>No campaigns.</p>
+{% endfor %}{% endblock %}

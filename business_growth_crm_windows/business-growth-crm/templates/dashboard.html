@@ -1,0 +1,50 @@
+{% extends "base.html" %}{% block content %}
+<div class="d-flex justify-content-between">
+  <h2>Dashboard</h2>
+  <a class="btn btn-primary" href="/leads/new">Add lead</a>
+</div>
+<div class="row g-3 my-3">
+  <div class="col-md-3">
+    <div class="metric">
+      Total leads
+      <h2>{{total}}</h2>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="metric">Outreach awaiting review<h2>{{outreach_pending}}</h2><a href="/outreach">Open queue</a></div>
+  </div>
+  {% for s,n in counts.items() %}
+  <div class="col-6 col-md-3">
+    <div class="metric">
+      {{s}}
+      <h2>{{n}}</h2>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<div class="row g-3">
+  <div class="col-md-6">
+    <div class="card p-3">
+      <h5>Follow-ups</h5>
+      {% for f in due %}
+      <p>
+        <a href="/leads/{{f.lead.id}}">{{f.lead.business_name}}</a> —
+        {{f.due_date}} {{f.note}}
+      </p>
+      {% else %}
+      <p>None scheduled.</p>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card p-3">
+      <h5>Recent leads</h5>
+      {% for l in recent %}
+      <p><a href="/leads/{{l.id}}">{{l.business_name}}</a> · {{l.status}}</p>
+      {% else %}
+      <p>No leads yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
